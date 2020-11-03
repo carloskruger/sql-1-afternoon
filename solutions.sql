@@ -2,7 +2,7 @@
 --     * id should be an auto-incrementing id/primary key - Use type: SERIAL
 
 CREATE TABLE person (
-    id SERIAL PRIMARY KEY,
+    person_id SERIAL PRIMARY KEY,
     name varchar(100),
     age INTEGER,
     height INTEGER,
@@ -70,3 +70,39 @@ select * from person where favorite_color in ('orange', 'green', 'blue');
 -- 14. List all the people in the person table where their favorite color is yellow or purple (use IN)
 
 select * from person where favorite_color in ('yellow', 'purple');
+
+-- Create a table called orders that records: order_id, person_id, product_name, product_price, quantity.
+
+CREATE TABLE orders (
+    orders_id SERIAL PRIMARY KEY,
+    person_id INTEGER,
+    product_name varchar(100),
+    product_price DECIMAL,
+    quantity INTEGER);
+
+-- Add 5 orders to the orders table.
+-- Make orders for at least two different people.
+-- person_id should be different for different people.
+
+INSERT INTO orders (person_id, product_name, product_price, quantity)
+    VALUES (2, 'bananas', 0.30, 10),
+    (2, 'apples', 1.50, 3),
+    (3, 'onion', 1.50, 8),
+    (3, 'garlic', 2.50, 3),
+    (3, 'carrots', 1.50, 4);
+
+-- Select all the records from the orders table.
+
+select * from orders;
+
+-- Calculate the total number of products ordered.
+
+select sum(quantity) from orders;
+
+-- Calculate the total order price.
+
+select sum(product_price * quantity) as total_order_price from orders;
+
+-- Calculate the total order price by a single person_id.
+
+select sum(product_price * quantity) as total_order_price from orders group by person_id;

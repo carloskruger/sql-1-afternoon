@@ -127,3 +127,23 @@ select name from artist where name like 'Black%';
 
 select name from artist where name like '%Black%';
 
+-- List all employee first and last names only that live in Calgary.
+
+select first_name, last_name from employee where city = 'Calgary';
+
+-- Find the birthdate for the youngest employee.
+select birth_date from employee order by birth_date desc limit(1);
+-- Find the birthdate for the oldest employee.
+
+select birth_date from employee order by birth_date limit(1);
+
+-- Find everyone that reports to Nancy Edwards (Use the ReportsTo column).
+
+-- You will need to query the employee table to find the Id for Nancy Edwards
+
+select * from employee where reports_to = ( select employee_id from employee where last_name ='Edwards' and first_name= 'Nancy');
+
+
+-- Count how many people live in Lethbridge.
+
+select count(*) from employee where city = 'Lethbridge';

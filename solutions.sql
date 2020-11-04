@@ -147,3 +147,35 @@ select * from employee where reports_to = ( select employee_id from employee whe
 -- Count how many people live in Lethbridge.
 
 select count(*) from employee where city = 'Lethbridge';
+
+-- Count how many orders were made from the USA.
+
+select count(*) from invoice where billing_country = 'USA';
+
+-- Find the largest order total amount.
+
+select total from invoice order by total desc limit(1);
+
+-- Find the smallest order total amount.
+
+select total from invoice order by total limit(1);
+
+-- Find all orders bigger than $5.
+
+select total from invoice where total > 5;
+
+-- Count how many orders were smaller than $5.
+
+select count(total) from invoice where total < 5;
+
+-- Count how many orders were in CA, TX, or AZ (use IN).
+
+select count(total) from invoice where billing_state in ('CA', 'TX', 'AZ');
+
+-- Get the average total of the orders.
+
+select avg(total) from invoice;
+
+-- Get the total sum of the orders.
+
+select sum(total) from invoice;
